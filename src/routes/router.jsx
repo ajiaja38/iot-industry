@@ -3,12 +3,13 @@ import {
   DashboardPage,
   DetailDevicesPages,
   LoginPage,
+  JustLogin,
   UnauthorizedPage,
 } from '../pages';
 import RequiereAuth from './utils/RequiereAuth';
-import PrivateRoute from './utils/PrivateRoute';
+import { privateAuth, privateRole } from './schema/schema.routes';
 
-const router = createHashRouter([
+const routes = [
   {
     path: '/',
     element: <LoginPage />,
@@ -18,29 +19,17 @@ const router = createHashRouter([
     path: '/',
     element: <RequiereAuth redirectPath="/" />,
     children: [
-      /* Private Routes Admin */
-      {
-        path: 'dashboard',
-        element: (
-          <PrivateRoute redirectPath="/unauthorized" role="admin">
-            <DashboardPage />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'detail-device/:id',
-        element: (
-          <PrivateRoute redirectPath="/unauthorized" role="admin">
-            <DetailDevicesPages />
-          </PrivateRoute>
-        ),
-      },
+      privateRole('dashboard', 'admin', <DashboardPage />),
+      privateRole('detail-device/:id', 'admin', <DetailDevicesPages />),
+      privateAuth('just-login', <JustLogin />),
     ],
   },
   {
     path: '/unauthorized',
     element: <UnauthorizedPage />,
   },
-]);
+];
+
+const router = createHashRouter(routes);
 
 export default router;
