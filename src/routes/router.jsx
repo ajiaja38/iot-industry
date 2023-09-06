@@ -18,7 +18,7 @@ const routes = [
     children: [
       privateRole('dashboard', 'admin', adminPage.dashboard),
       privateRole('detail-device/:id', 'admin', adminPage.detailDevice),
-      privateAuth('just-login', commonPage.JustLogin),
+      privateAuth('just-login', adminPage.JustLogin),
     ],
   },
   {

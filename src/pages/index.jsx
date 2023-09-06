@@ -6,12 +6,12 @@ import UnauthorizedPage from './error/UnauthorizedPage';
 
 export const commonPage = {
   login: <LoginPage />,
-  JustLogin: <JustLogin />,
 };
 
 export const adminPage = {
   dashboard: <DashboardPage />,
   detailDevice: <DetailDevicesPages />,
+  JustLogin: <JustLogin />,
 };
 
 export const errorPage = {
