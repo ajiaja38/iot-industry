@@ -1,32 +1,29 @@
 import { createHashRouter } from 'react-router-dom';
+import { adminPage, commonPage, errorPage } from '../pages';
 import {
-  DashboardPage,
-  DetailDevicesPages,
-  LoginPage,
-  JustLogin,
-  UnauthorizedPage,
-} from '../pages';
-import RequiereAuth from './utils/RequiereAuth';
-import { privateAuth, privateRole } from './schema/schema.routes';
+  privateAuth,
+  privateRole,
+  requiereAuthSchema,
+} from './schema/schema.routes';
 
 const routes = [
   {
     path: '/',
-    element: <LoginPage />,
+    element: commonPage.login,
     errorElement: <div>Halaman Tidak Tersedia!</div>,
   },
   {
     path: '/',
-    element: <RequiereAuth redirectPath="/" />,
+    element: requiereAuthSchema('/'),
     children: [
-      privateRole('dashboard', 'admin', <DashboardPage />),
-      privateRole('detail-device/:id', 'admin', <DetailDevicesPages />),
-      privateAuth('just-login', <JustLogin />),
+      privateRole('dashboard', 'admin', adminPage.dashboard),
+      privateRole('detail-device/:id', 'admin', adminPage.detailDevice),
+      privateAuth('just-login', commonPage.JustLogin),
     ],
   },
   {
     path: '/unauthorized',
-    element: <UnauthorizedPage />,
+    element: errorPage.UnauthorizedPage,
   },
 ];
 

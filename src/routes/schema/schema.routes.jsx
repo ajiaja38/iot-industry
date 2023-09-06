@@ -1,4 +1,9 @@
 import PrivateRoute from '../utils/PrivateRoute';
+import RequiereAuth from '../utils/RequiereAuth';
+
+export const requiereAuthSchema = (redirectPath) => {
+  return <RequiereAuth redirectPath={redirectPath} />;
+};
 
 export const privateRole = (path, role, element) => {
   return {
