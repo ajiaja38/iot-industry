@@ -6,7 +6,7 @@ import {
   requiereAuthSchema,
 } from './schema/schema.routes';
 
-const routes = [
+const router = createHashRouter([
   {
     path: '/',
     element: commonPage.login,
@@ -25,8 +25,6 @@ const routes = [
     path: '/unauthorized',
     element: errorPage.UnauthorizedPage,
   },
-];
-
-const router = createHashRouter(routes);
+]);
 
 export default router;
